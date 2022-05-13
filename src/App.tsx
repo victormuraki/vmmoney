@@ -3,6 +3,7 @@ import { Header } from './components/Header/index';
 import { GlobalStyle } from './styles/global';
 import { useState } from 'react';
 import { NewTransaction } from './components/NewTransactionModal';
+import { TransactionsProvider } from './TransactionsContext';
 
 export function App() {
   const [isNewTransactionIsOpen, setIsNewTransactionIsOpen] = useState(false)
@@ -16,15 +17,15 @@ export function App() {
   }
 
   return (
-    <>
+    <TransactionsProvider>
       <Header onOpenNewTransactionModal={handleOpenNewTransactionModal} />
       <Dashboard />
       <NewTransaction
-      isOpen={isNewTransactionIsOpen}
-      onRequestClone={handleCloseTransactionModal}
+        isOpen={isNewTransactionIsOpen}
+        onRequestClone={handleCloseTransactionModal}
       />
 
       <GlobalStyle />
-    </>
+    </TransactionsProvider>
   );
 }
